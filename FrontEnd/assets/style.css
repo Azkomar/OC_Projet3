@@ -125,6 +125,36 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.menu-categories {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.menu-categories button {
+	border-radius: 60px;
+	padding: 8px 25px 8px 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+	background-color: white;
+}
+.menu-categories button:focus {
+	color: white;
+	background-color: #1D6154;
+}
+
+.noWork {
+	display: none;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
