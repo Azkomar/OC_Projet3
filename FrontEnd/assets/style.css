@@ -158,6 +158,7 @@ nav a:hover {
 .menu-categories button:focus {
 	color: white;
 	background-color: #1D6154;
+	outline: 0;
 }
 
 .noWork {
@@ -182,9 +183,10 @@ nav a:hover {
 }
 #contact > *, #login > *{
 	text-align: center;
-
+	display: flex;
+	justify-content: center;
 }
-#contact h2, #login h2{
+#contact h2 {
 	margin-bottom: 20px;
 }
 #contact form, #login form{
@@ -238,4 +240,10 @@ footer nav ul {
 
 #loginPage footer {
 	align-items: flex-end;
+}
+
+#login a {
+	color: #3D3D3D;
+	font-weight: 500;
+	font-size: 14px;
 }

@@ -34,7 +34,7 @@ async function getCategories() {
     });
     const btns = document.querySelectorAll('button');
     const gallery = document.querySelectorAll('.work');
-    
+
     btns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             gallery.forEach(fig => {
