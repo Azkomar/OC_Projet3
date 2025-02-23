@@ -52,5 +52,29 @@ async function getCategories() {
     });
 }
 
+async function logout() {
+    const logout = document.getElementById('logout-li');
+    logout.addEventListener('click', (e) => {
+        window.localStorage.removeItem('token');
+    });
+}
+
+async function isLogged() {
+    const token = window.localStorage.getItem('token');
+    const login = document.getElementById('login-li');
+    const logout = document.getElementById('logout-li');
+
+    if (token !== null) {
+        login.style.display = 'none';
+        logout.style.display = 'block';
+    }
+    else {
+        login.style.display = 'block';
+        logout.style.display = 'none';
+    }
+}
+
+logout();
+isLogged();
 getWorks();
 getCategories();

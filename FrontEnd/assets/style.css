@@ -247,3 +247,7 @@ footer nav ul {
 	font-weight: 500;
 	font-size: 14px;
 }
+#message-erreur {
+	color: red;
+	margin-top: 15px;
+}
