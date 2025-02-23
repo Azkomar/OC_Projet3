@@ -132,7 +132,6 @@ nav a:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 
 .menu-categories {
@@ -250,4 +249,38 @@ footer nav ul {
 #message-erreur {
 	color: red;
 	margin-top: 15px;
+}
+
+.mode-edition {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 59px;
+	background-color: black;
+	width: 100%;
+}
+.mode-edition p, .mode-edition i {
+	background-color: black;
+	color: white;
+	margin-left: 5px;
+	margin-left: 5px;
+}
+.project-logged {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.modifier {
+	margin-left: 15px;
+	display: flex;
+	flex-direction: row;
+}
+.modifier i, .modifier p {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+.hide {
+	display: none;
 }

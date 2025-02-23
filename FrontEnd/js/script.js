@@ -63,14 +63,20 @@ async function isLogged() {
     const token = window.localStorage.getItem('token');
     const login = document.getElementById('login-li');
     const logout = document.getElementById('logout-li');
+    const header = document.querySelector('.mode-edition');
+    const modif = document.querySelector('.modifier');
 
     if (token !== null) {
         login.style.display = 'none';
         logout.style.display = 'block';
+        header.className = 'mode-edition'
+        modif.className = 'modifier';
     }
     else {
         login.style.display = 'block';
         logout.style.display = 'none';
+        header.className = 'mode-edition hide'
+        modif.className = 'modifier hide';
     }
 }
 
