@@ -284,3 +284,34 @@ footer nav ul {
 .hide {
 	display: none;
 }
+
+/******** Modale **********/
+::backdrop {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+.modal {
+	display: none;
+}
+.modale-open {
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 50%;
+	height: 50%;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	border-radius: 10px;
+	border: none;
+}
+#modale-close {
+	align-self: flex-end;
+	font-size: 24px;
+}
+#titre-modale {
+	font-size: 26px;
+	font-weight: 400;
+}

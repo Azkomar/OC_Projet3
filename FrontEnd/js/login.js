@@ -3,7 +3,7 @@ async function login() {
     const erreur = document.getElementById('message-erreur');
     erreur.innerHTML = '';
     loginForm.addEventListener("submit", (e) => {
-        // Désactivation du comportement par défaut du navigateur
+
         e.preventDefault();
 
         let emailValue = document.getElementById('email').value;

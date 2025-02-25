@@ -32,7 +32,7 @@ async function getCategories() {
         btn.className = "menu-btn"
         menu.appendChild(btn);
     });
-    const btns = document.querySelectorAll('button');
+    const btns = document.querySelectorAll('.menu-btn');
     const gallery = document.querySelectorAll('.work');
 
     btns.forEach(btn => {
@@ -67,6 +67,7 @@ async function isLogged() {
     const modif = document.querySelector('.modifier');
 
     if (token !== null) {
+        modify();
         login.style.display = 'none';
         logout.style.display = 'block';
         header.className = 'mode-edition'
@@ -78,6 +79,21 @@ async function isLogged() {
         header.className = 'mode-edition hide'
         modif.className = 'modifier hide';
     }
+}
+
+async function modify() {
+    const blockButton = document.querySelector('.modifier');
+    const modale = document.querySelector('.modale');
+    const closeBtn = document.getElementById('modale-close');
+
+    closeBtn.addEventListener('click', (e) => {
+        modale.close();
+        modale.className = 'modale';
+    })
+    blockButton.addEventListener('click', (e) => {
+        modale.showModal();
+        modale.className = 'modale-open';
+    })
 }
 
 logout();
