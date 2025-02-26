@@ -277,6 +277,11 @@ footer nav ul {
 	margin-left: 15px;
 	display: flex;
 	flex-direction: row;
+	background-color:#FFFEF8;
+	border: none;
+}
+.modifier:focus {
+	outline: none;
 }
 .modifier i, .modifier p {
 	margin-left: 5px;
@@ -290,14 +295,11 @@ footer nav ul {
 ::backdrop {
 	background-color: rgba(0, 0, 0, 0.3);
 }
-.modal {
+.modale {
 	display: none;
 }
 .modale-open {
-	padding: 50px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	padding: 50px 50px 0px 50px;
 	position: fixed;
 	height: 70vh;
 	left: 50%;
@@ -308,6 +310,12 @@ footer nav ul {
 	border-radius: 10px;
 	border: none;
 	scrollbar-width:none;
+}
+.main-modale {
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 #modale-close {
 	align-self: flex-end;
@@ -321,7 +329,8 @@ footer nav ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-between;
+	align-items: center;
 	width: 100%;
 	gap: 10px;
 	box-sizing: border-box;
@@ -329,13 +338,26 @@ footer nav ul {
 	margin-bottom: 20px;
 	padding: 30px;
 }
-.modale-work img {
+.modale-img-container {
 	width: 18%;
+	margin-top: 20px;
+	position: relative;
 }
-.modale-open footer {
+.modale-work img {
+	width: 100%;
+}
+.modale-work i {
+	position: absolute;
+	top: 10%;
+	right: 10%;
+	background-color: black;
+	color: white;
+	padding: 5%;
+	border-radius: 5px;
+}
+.main-modale footer {
 	position: relative;
 	bottom: 0;
-	margin-bottom: 15px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

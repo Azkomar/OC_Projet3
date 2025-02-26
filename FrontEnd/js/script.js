@@ -64,12 +64,16 @@ async function modaleGallery() {
     const data = await reponse.json();
     const modaleGallery = document.querySelector('.modale-work');
     data.forEach(work => {
+        const container = document.createElement('div');
+        container.className = 'modale-img-container';
         const img = document.createElement('img');
-
         img.src = work["imageUrl"];
         img.alt = work["title"];
-
-        modaleGallery.appendChild(img);
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-trash-can';
+        container.appendChild(img);
+        container.appendChild(icon);
+        modaleGallery.appendChild(container);
 });
 }
 
