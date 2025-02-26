@@ -142,7 +142,7 @@ nav a:hover {
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
-.menu-categories button {
+.menu-btn {
 	border-radius: 60px;
 	padding: 8px 25px 8px 25px;
 	margin-left: 10px;
@@ -154,7 +154,7 @@ nav a:hover {
 	color: #1D6154;
 	background-color: white;
 }
-.menu-categories button:focus {
+.menu-btn:focus {
 	color: white;
 	background-color: #1D6154;
 	outline: 0;
@@ -195,7 +195,7 @@ nav a:hover {
 	flex-direction: column;
 }
 
-#contact input, #login input {
+#contact input, #login input, #add-photo {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -226,6 +226,7 @@ footer nav ul {
 	margin: 2em
 }
 
+/******* Login *******/
 #loginPage {
 	height: 100vh;
 	display: flex;
@@ -293,19 +294,20 @@ footer nav ul {
 	display: none;
 }
 .modale-open {
-	padding: 30px;
+	padding: 50px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 50%;
-	height: 50%;
 	position: fixed;
+	height: 70vh;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	margin: 0;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	border-radius: 10px;
 	border: none;
+	scrollbar-width:none;
 }
 #modale-close {
 	align-self: flex-end;
@@ -314,4 +316,47 @@ footer nav ul {
 #titre-modale {
 	font-size: 26px;
 	font-weight: 400;
+}
+.modale-work {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	width: 100%;
+	gap: 10px;
+	box-sizing: border-box;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 30px;
+}
+.modale-work img {
+	width: 18%;
+}
+.modale-open footer {
+	position: relative;
+	bottom: 0;
+	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+hr {
+	width: 80%;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+.add-photo {
+	border-radius: 60px;
+	padding: 8px 25px 8px 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-family: 'Syne';
+	font-size: 16px;
+	font-weight: 700;
+	border: 1px solid #1D6154;
+	color: white;
+	background-color: #1D6154;
+	outline: 0;
+	align-self: center;
 }

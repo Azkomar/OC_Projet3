@@ -59,6 +59,35 @@ async function logout() {
     });
 }
 
+async function modaleGallery() {
+    const reponse = await fetch("http://localhost:5678/api/works");
+    const data = await reponse.json();
+    const modaleGallery = document.querySelector('.modale-work');
+    data.forEach(work => {
+        const img = document.createElement('img');
+
+        img.src = work["imageUrl"];
+        img.alt = work["title"];
+
+        modaleGallery.appendChild(img);
+});
+}
+
+async function modify() {
+    const blockButton = document.querySelector('.modifier');
+    const modale = document.querySelector('.modale');
+    const closeBtn = document.getElementById('modale-close');
+
+    closeBtn.addEventListener('click', (e) => {
+        modale.close();
+        modale.className = 'modale';
+    })
+    blockButton.addEventListener('click', (e) => {
+        modale.showModal();
+        modale.className = 'modale-open';
+    })
+}
+
 async function isLogged() {
     const token = window.localStorage.getItem('token');
     const login = document.getElementById('login-li');
@@ -81,22 +110,8 @@ async function isLogged() {
     }
 }
 
-async function modify() {
-    const blockButton = document.querySelector('.modifier');
-    const modale = document.querySelector('.modale');
-    const closeBtn = document.getElementById('modale-close');
-
-    closeBtn.addEventListener('click', (e) => {
-        modale.close();
-        modale.className = 'modale';
-    })
-    blockButton.addEventListener('click', (e) => {
-        modale.showModal();
-        modale.className = 'modale-open';
-    })
-}
-
 logout();
 isLogged();
 getWorks();
 getCategories();
+modaleGallery();
