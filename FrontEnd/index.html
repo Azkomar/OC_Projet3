@@ -39,18 +39,41 @@
 			</article>
 		</section>
 		<dialog class="modale">
-			<section class="main-modale">
-				<i class="fa-solid fa-xmark" id="modale-close"></i>
+			<section class="main-modale" id="main-modale">
+				<i class="fa-solid fa-xmark modale-close" id="modale-close-main"></i>
 				<h3 id="titre-modale">Galerie photo</h3>
 				<div class="modale-work"></div>
-				<footer>
+				<footer class="dialog-footer">
+					<hr>
+					<button class="add-photo">Ajouter une photo</button>
+				</footer>
+			</section>
+			<section class="hide" id="second-modale">
+				<div class="dialog-i">
+					<i class="fa-solid fa-arrow-left" id="back-arrow"></i>
+					<i class="fa-solid fa-xmark modale-close"></i>
+				</div>
+				<h3 id="titre-modale">Ajout photo</h3>
+				<div class="div-add-image">
+					<i class="fa-regular fa-image"></i>
+					<button>+ Ajouter photo</button>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<form class="add-work-form" action="#" method="post">
+					<label for="form-titre">Titre</label>
+					<input type="text" name="form-titre" id="form-titre">
+					<label for="form-categories">Catégorie</label>
+					<select name="form-categories" id="form-categories">
+						<option selected></option>
+					</select>
+				</form>
+				<footer class="dialog-footer">
 					<hr>
 					<form action="#" method="post">
-						<button class="add-photo">Ajouter une photo</button>
+						<button class="add-photo" disabled>Valider</button>
 					</form>
 				</footer>
 			</section>
-			<section class="second-modale"></section>
 		</dialog>
 		<section id="portfolio">
 			<div class="project-logged">

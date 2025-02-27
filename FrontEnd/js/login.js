@@ -30,7 +30,7 @@ async function login() {
         })
         .then(data => {
             window.localStorage.setItem("token", data.token);
-            window.location.replace("http://127.0.0.1:5500/Portfolio-architecte-sophie-bluel/FrontEnd/index.html");
+            window.location.href = "http://127.0.0.1:5500/Portfolio-architecte-sophie-bluel/FrontEnd/index.html";
         })
         .catch(error => {
             console.error('Erreur:', error);
