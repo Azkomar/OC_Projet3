@@ -55,8 +55,14 @@
 				</div>
 				<h3 id="titre-modale">Ajout photo</h3>
 				<div class="div-add-image">
-					<i class="fa-regular fa-image"></i>
-					<button>+ Ajouter photo</button>
+					<div id="preview">
+						<i class="fa-regular fa-image" id="previewIcon"></i>
+					</div>
+					<label for="image_uploads">+ Ajouter photo</label>
+					<input type="file" 
+					accept=".jpg, .jpeg, .png" 
+					id="image_uploads"
+					name="image_uploads">
 					<p>jpg, png : 4mo max</p>
 				</div>
 				<form class="add-work-form" action="#" method="post">

@@ -8,6 +8,7 @@ async function getWorks() {
     data.forEach(work => {
         const figure = document.createElement('figure');
         figure.dataset.category = work["category"]["name"];
+        figure.dataset.id = work["id"];
         figure.className = 'work';
         const img = document.createElement('img');
         const figcaption = document.createElement('figcaption');
@@ -83,6 +84,7 @@ function modaleAddPhoto() {
     btn.addEventListener('click', (e) => {
         mainSection.className = 'hide';
         secondSection.className = 'second-modale';
+        imagePreview();
     });
     previous.addEventListener('click', (e) => {
         mainSection.className = 'main-modale';
@@ -170,16 +172,41 @@ async function removeWork() {
     trashIcon.forEach( trash => {
         const parent = trash.parentNode;
         trash.addEventListener('click', async (e) => {
-            console.log(parent.dataset.id);
+            e.preventDefault();
             const token = window.localStorage.getItem("token");
-            console.log(token)
-            await fetch(`http://localhost:5678/api/works/${parent.dataset.id}`, {
+            const workId = parent.dataset.id;
+            const response = await fetch(`http://localhost:5678/api/works/${workId}`, {
                 method: 'DELETE',
                 headers: { 
                     'Authorization': `Bearer ${token}`
                 }
             });
+
+            if (response.ok) {
+                const elementToDelete = document.querySelectorAll(`[data-id="${workId}"]`);
+                elementToDelete.forEach(elem => {
+                    elem.remove();
+                })
+            } else {
+                console.log("L'élément n'a pas pu être supprimer ...");
+            }
         });
+    });
+}
+
+function imagePreview() {
+    const preview = document.getElementById('preview');
+    const input = document.getElementById('image_uploads');
+
+    input.addEventListener("change", (e) => {
+        const fichier = input.files[0];
+        if (fichier) {
+            const img = document.createElement('img');
+            img.src = window.URL.createObjectURL(fichier);
+            img.alt = fichier.name;
+            preview.innerHTML = '';
+            preview.appendChild(img);
+        }
     });
 }
 

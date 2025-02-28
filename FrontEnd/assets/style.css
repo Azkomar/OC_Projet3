@@ -406,8 +406,9 @@ hr {
 	color: #CBD6DC;
 	background-color: #E8F1F6;
 }
-.div-add-image button {
+.div-add-image label {
 	background-color: #CBD6DC;
+	text-align: center;
 	color: #306685;
 	border: none;
 	border-radius: 20px;
@@ -417,6 +418,13 @@ hr {
 	font-family: 'Work Sans';
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+.div-add-image input[type="file"] {
+	display: none;
+}
+.div-add-image img {
+	width: 76px;
+	height: auto;
 }
 .div-add-image p {
 	background-color: #E8F1F6;
