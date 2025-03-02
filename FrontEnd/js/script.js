@@ -85,6 +85,16 @@ function modaleAddPhoto() {
         mainSection.className = 'hide';
         secondSection.className = 'second-modale';
         imagePreview();
+        const select = document.getElementById('form-categories');
+        if (select.children.length === 1) {
+            selectCategories(select);
+        }
+        const form = document.getElementById('second-modale');
+        const eventList = ['change', 'keyup'];
+        eventList.forEach(evnt => {
+            form.addEventListener(evnt, checkAddWork);
+        });
+        addWork();
     });
     previous.addEventListener('click', (e) => {
         mainSection.className = 'main-modale';
@@ -120,7 +130,7 @@ async function modaleGallery() {
 // Fait apparaître ou disparaitre la fenêtre modale
 async function modify() {
     const blockButton = document.querySelector('.modifier');
-    const modale = document.querySelector('.modale');
+    const modale = document.getElementById('modale');
     const closeBtns = document.querySelectorAll('.modale-close');
     closeBtns.forEach((closeBtn) => {
         closeBtn.addEventListener('click', (e) => {
@@ -132,8 +142,16 @@ async function modify() {
     blockButton.addEventListener('click', (e) => {
         modale.showModal();
         modale.className = 'modale-open';
-    })
+    });
+
+    modale.addEventListener('click', (event) => {
+        if (event.target === modale) {
+            modale.close();
+            modale.className = 'modale';
+        }
+    });
 }
+
 // Test si l'utilisateur est connecté (retourne true/false)
 function isLogged() {
     const token = window.localStorage.getItem('token');
@@ -167,6 +185,7 @@ function whenLogged() {
     }
 }
 
+// Permet de supprimer les travaux existants
 async function removeWork() {
     const trashIcon = document.querySelectorAll('.trash');
     trashIcon.forEach( trash => {
@@ -181,7 +200,6 @@ async function removeWork() {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
             if (response.ok) {
                 const elementToDelete = document.querySelectorAll(`[data-id="${workId}"]`);
                 elementToDelete.forEach(elem => {
@@ -194,6 +212,7 @@ async function removeWork() {
     });
 }
 
+// Permet de prévisualiser les images chargées
 function imagePreview() {
     const preview = document.getElementById('preview');
     const input = document.getElementById('image_uploads');
@@ -202,11 +221,65 @@ function imagePreview() {
         const fichier = input.files[0];
         if (fichier) {
             const img = document.createElement('img');
+            img.id = 'previewImg';
             img.src = window.URL.createObjectURL(fichier);
             img.alt = fichier.name;
             preview.innerHTML = '';
             preview.appendChild(img);
         }
+    });
+}
+// Affiche les catégories dans le menu déroulant en les récupérant depuis l'API
+async function selectCategories(select) {
+    const reponse = await fetch("http://localhost:5678/api/categories");
+    const data = await reponse.json();
+    data.forEach(cat => {
+        const option = document.createElement('option');
+        option.innerHTML = cat["name"];
+        option.value = cat["id"];
+        select.appendChild(option);
+    });
+}
+
+function checkAddWork() {
+    const titre = document.getElementById('form-titre');
+    const select = document.getElementById('form-categories');
+    const btn = document.getElementById('form-valid');
+    const preview = document.getElementById('preview');
+
+    if (select.value !== '' && titre.value !== '' && preview.querySelector('img')) {
+        btn.disabled = false;
+    }
+    else {
+        btn.disabled = true;
+    }
+}
+
+async function addWork() {
+    const validForm = document.querySelector('.add-work-form');
+    validForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const token = window.localStorage.getItem("token");
+        const titreValue = document.getElementById('form-titre').value;
+        const imgSrc = document.getElementById('previewImg').src;
+        const selectValue = parseInt(document.getElementById('form-categories').value);
+
+        // Convertir l'image en Blob
+        const imgResponse = await fetch(imgSrc);
+        const blob = await imgResponse.blob();
+        const file = new File([blob], 'image.png', { type: blob.type });
+
+        let formData = new FormData();
+        formData.append('image', file);
+        formData.append('title', titreValue);
+        formData.append('category', selectValue);
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
     });
 }
 

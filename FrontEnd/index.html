@@ -38,7 +38,7 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 			</article>
 		</section>
-		<dialog class="modale">
+		<dialog class="modale" id="modale">
 			<section class="main-modale" id="main-modale">
 				<i class="fa-solid fa-xmark modale-close" id="modale-close-main"></i>
 				<h3 id="titre-modale">Galerie photo</h3>
@@ -65,20 +65,19 @@
 					name="image_uploads">
 					<p>jpg, png : 4mo max</p>
 				</div>
-				<form class="add-work-form" action="#" method="post">
+				<form class="add-work-form" action="#" method="POST">
 					<label for="form-titre">Titre</label>
 					<input type="text" name="form-titre" id="form-titre">
 					<label for="form-categories">Catégorie</label>
 					<select name="form-categories" id="form-categories">
-						<option selected></option>
+						<option selected disabled></option>
 					</select>
+					<footer class="dialog-footer">
+						<hr>
+						<button class="add-photo" type="submit" id="form-valid" disabled>Valider</button>
+					</footer>
 				</form>
-				<footer class="dialog-footer">
-					<hr>
-					<form action="#" method="post">
-						<button class="add-photo" disabled>Valider</button>
-					</form>
-				</footer>
+				
 			</section>
 		</dialog>
 		<section id="portfolio">
