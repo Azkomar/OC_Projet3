@@ -5,6 +5,7 @@ async function getWorks() {
     const data = await reponse.json();
 
     const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = "";
     data.forEach(work => {
         const figure = document.createElement('figure');
         figure.dataset.category = work["category"]["name"];
@@ -39,6 +40,7 @@ async function getCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     const data = await reponse.json();
     const menu = document.getElementById('menu-cate');
+    menu.innerHTML = "";
     data.forEach(cat => {
         const btn = document.createElement('button');
         btn.innerHTML = cat["name"];
@@ -87,8 +89,10 @@ function modaleAddPhoto() {
     const previous = document.getElementById('back-arrow');
     const mainSection = document.getElementById('main-modale');
     const secondSection = document.getElementById('second-modale');
+    const validForm = document.querySelector('.add-work-form');
 
     btn.addEventListener('click', (e) => {
+        validForm.reset();
         mainSection.className = 'hide';
         secondSection.className = 'second-modale';
         imagePreview();
@@ -101,7 +105,6 @@ function modaleAddPhoto() {
         eventList.forEach(evnt => {
             form.addEventListener(evnt, checkAddWork);
         });
-        addWork();
     });
     previous.addEventListener('click', (e) => {
         mainSection.className = 'main-modale';
@@ -118,6 +121,7 @@ async function modaleGallery() {
     const reponse = await fetch("http://localhost:5678/api/works");
     const data = await reponse.json();
     const modaleGallery = document.querySelector('.modale-work');
+    modaleGallery.innerHTML = "";
     data.forEach(work => {
         const container = document.createElement('div');
         container.className = 'modale-img-container';
@@ -222,8 +226,9 @@ async function removeWork() {
 // Permet de prévisualiser les images chargées
 function imagePreview() {
     const preview = document.getElementById('preview');
+    preview.innerHTML = '<i class="fa-regular fa-image" id="previewIcon"></i>';
     const input = document.getElementById('image_uploads');
-
+    input.value = null;
     input.addEventListener("change", (e) => {
         const fichier = input.files[0];
         if (fichier) {
@@ -233,7 +238,7 @@ function imagePreview() {
             img.alt = fichier.name;
             preview.innerHTML = '';
             preview.appendChild(img);
-        }
+        } 
     });
 }
 // Affiche les catégories dans le menu déroulant en les récupérant depuis l'API
@@ -248,11 +253,12 @@ async function selectCategories(select) {
     });
 }
 
+// Vérifie si le formulaire 'addWork' est correctement rempli
 function checkAddWork() {
     const titre = document.getElementById('form-titre');
     const select = document.getElementById('form-categories');
-    const btn = document.getElementById('form-valid');
     const preview = document.getElementById('preview');
+    const btn = document.getElementById('form-valid');
 
     if (select.value !== '' && titre.value !== '' && preview.querySelector('img')) {
         btn.disabled = false;
@@ -262,35 +268,35 @@ function checkAddWork() {
     }
 }
 
-async function addWork() {
-    const validForm = document.querySelector('.add-work-form');
-    validForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const token = window.localStorage.getItem("token");
-        const titreValue = document.getElementById('form-titre').value;
-        const imgSrc = document.getElementById('previewImg').src;
-        const selectValue = parseInt(document.getElementById('form-categories').value);
+// Ajout d'un nouveau 'travail'
+async function addWork(e) {
+    e.preventDefault();
+    const token = window.localStorage.getItem("token");
+    const titreValue = document.getElementById('form-titre').value;
+    const imgSrc = document.getElementById('previewImg').src;
+    const selectValue = parseInt(document.getElementById('form-categories').value);
 
-        // Convertir l'image en Blob
-        const imgResponse = await fetch(imgSrc);
-        const blob = await imgResponse.blob();
-        const file = new File([blob], 'image.png', { type: blob.type });
+    // Convertir l'image en Blob
+    const imgResponse = await fetch(imgSrc);
+    const blob = await imgResponse.blob();
+    const file = new File([blob], 'image.png', { type: blob.type });
 
-        let formData = new FormData();
-        formData.append('image', file);
-        formData.append('title', titreValue);
-        formData.append('category', selectValue);
-        const response = await fetch('http://localhost:5678/api/works', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            },
-            body: formData
-        });
+    let formData = new FormData();
+    formData.append('image', file);
+    formData.append('title', titreValue);
+    formData.append('category', selectValue);
+    const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const validForm = document.querySelector('.add-work-form');
+    validForm.addEventListener('submit', addWork);
     logout();
     whenLogged();
     getWorks();
