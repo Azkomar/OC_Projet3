@@ -272,6 +272,7 @@ footer nav ul {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: inherit;
 }
 .modifier {
 	margin-left: 15px;

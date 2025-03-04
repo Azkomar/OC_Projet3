@@ -23,7 +23,14 @@ async function getWorks() {
         gallery.appendChild(figure);
     });
 
-    getCategories();
+    const menuBtn = document.getElementById('menu-cate');
+
+    if (!isLogged()) {
+        menuBtn.className = 'menu-categories';
+        getCategories();
+    } else {
+        menuBtn.className = 'hide';
+    }
 }
 
 // Envoie une requête au server pour obtenir les différentes catégories
@@ -31,7 +38,7 @@ async function getWorks() {
 async function getCategories() {
     const reponse = await fetch("http://localhost:5678/api/categories");
     const data = await reponse.json();
-    const menu = document.querySelector('.menu-categories');
+    const menu = document.getElementById('menu-cate');
     data.forEach(cat => {
         const btn = document.createElement('button');
         btn.innerHTML = cat["name"];
